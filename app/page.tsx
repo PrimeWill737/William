@@ -217,7 +217,13 @@ export default function Home() {
                 <div className="card__body">
                   <h3 className="card__title">About me</h3>
                   <p className="card__text">
-                    Fullstack developer focused on quality and maintainable code.
+                  I am William Bosworth, a passionate Full-Stack Developer focused on building efficient, scalable, and user-centered digital solutions. My approach to software development is grounded in writing clean, maintainable, and high-quality code that not only solves problems today but remains reliable and adaptable for the future.
+
+I enjoy working across the entire development stack, from designing intuitive user interfaces to building robust backend systems and integrating APIs that power modern applications. My goal is to create technology that is not only functional but also optimized for performance, usability, and long-term sustainability.
+
+Beyond simply writing code, I focus on software architecture, code readability, and maintainability, ensuring that projects can grow and evolve without unnecessary complexity. I believe great software is built through thoughtful planning, continuous learning, and attention to detail.
+
+As a developer, I am constantly exploring new technologies and improving my skills in areas such as web development, software engineering, and emerging digital platforms. Whether working on independent projects, collaborative builds, or innovative startup ideas, I aim to deliver solutions that are efficient, impactful, and built with best development practices.
                   </p>
                 </div>
               </article>

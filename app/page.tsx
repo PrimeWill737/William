@@ -68,6 +68,44 @@ const PROJECTS = [
 export default function Home() {
   const [frontFolded, setFrontFolded] = useState(false);
   const [backVisible, setBackVisible] = useState(false);
+  const [contactName, setContactName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactMessage, setContactMessage] = useState("");
+  const [contactStatus, setContactStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [contactError, setContactError] = useState("");
+
+  const handleContactSubmit = useCallback(
+    async (e: React.FormEvent) => {
+      e.preventDefault();
+      setContactError("");
+      setContactStatus("sending");
+      try {
+        const res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: contactName.trim(),
+            email: contactEmail.trim(),
+            message: contactMessage.trim(),
+          }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          setContactStatus("error");
+          setContactError(data.error ?? "Something went wrong.");
+          return;
+        }
+        setContactStatus("success");
+        setContactName("");
+        setContactEmail("");
+        setContactMessage("");
+      } catch {
+        setContactStatus("error");
+        setContactError("Failed to send. Please try again.");
+      }
+    },
+    [contactName, contactEmail, contactMessage]
+  );
 
   const openProjects = useCallback(() => {
     setFrontFolded(true);
@@ -215,6 +253,68 @@ export default function Home() {
               >
                 View my projects
               </button>
+              <section className="contact-form" aria-labelledby="contact-heading">
+                <h2 id="contact-heading" className="contact-form__title">Contact me</h2>
+                <form onSubmit={handleContactSubmit} className="contact-form__form">
+                  <div className="contact-form__row">
+                    <div className="contact-form__field">
+                      <label htmlFor="contact-name" className="contact-form__label">Name</label>
+                      <input
+                        id="contact-name"
+                        type="text"
+                        name="name"
+                        required
+                        value={contactName}
+                        onChange={(e) => setContactName(e.target.value)}
+                        className="contact-form__input"
+                        placeholder="Your name"
+                        disabled={contactStatus === "sending"}
+                      />
+                    </div>
+                    <div className="contact-form__field">
+                      <label htmlFor="contact-email" className="contact-form__label">Email</label>
+                      <input
+                        id="contact-email"
+                        type="email"
+                        name="email"
+                        required
+                        value={contactEmail}
+                        onChange={(e) => setContactEmail(e.target.value)}
+                        className="contact-form__input"
+                        placeholder="your@email.com"
+                        disabled={contactStatus === "sending"}
+                      />
+                    </div>
+                  </div>
+                  <div className="contact-form__field">
+                    <label htmlFor="contact-message" className="contact-form__label">Message</label>
+                    <textarea
+                      id="contact-message"
+                      name="message"
+                      required
+                      rows={4}
+                      value={contactMessage}
+                      onChange={(e) => setContactMessage(e.target.value)}
+                      className="contact-form__input contact-form__textarea"
+                      placeholder="Your message..."
+                      disabled={contactStatus === "sending"}
+                    />
+                  </div>
+                  {contactStatus === "error" && (
+                    <p className="contact-form__error" role="alert">{contactError}</p>
+                  )}
+                  {contactStatus === "success" && (
+                    <p className="contact-form__success">Message sent. I&apos;ll get back to you soon.</p>
+                  )}
+                  <button
+                    type="submit"
+                    className="cta-block__btn contact-form__submit"
+                    disabled={contactStatus === "sending"}
+                  >
+                    {contactStatus === "sending" ? "Sending..." : "Send message"}
+                  </button>
+                </form>
+              </section>
             </div>
           </div>
         </section>

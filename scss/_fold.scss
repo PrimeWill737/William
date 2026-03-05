@@ -1,0 +1,47 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.book-container {
+  perspective: 2000px;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.book-page {
+  position: absolute;
+  inset: 0;
+  min-height: 100vh;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.book-page--front {
+  z-index: 2;
+  transform-origin: left center;
+  transition: transform $transition-fold;
+}
+
+.book-page--front.is-folded {
+  transform: rotateY(-180deg);
+  pointer-events: none;
+}
+
+.book-page--back {
+  z-index: 1;
+  transform-origin: right center;
+  transform: rotateY(180deg);
+  transition: transform $transition-fold;
+}
+
+.book-page--back.is-visible {
+  transform: rotateY(0deg);
+  z-index: 3;
+}
+
+.book-page--back.is-visible.is-folded {
+  transform: rotateY(180deg);
+  z-index: 1;
+}

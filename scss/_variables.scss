@@ -1,0 +1,55 @@
+// Colors - nature-inspired palette
+$teal-green: #3d5a50;
+$forest-green: #2d4439;
+$dark-green: #1e3328;
+$brown: #5c4033;
+$tan: #c4a77d;
+$beige: #e8dcc4;
+$cream: #f5f0e6;
+$white: #ffffff;
+$shadow: rgba(0, 0, 0, 0.15);
+$shadow-strong: rgba(0, 0, 0, 0.25);
+
+// Typography
+$font-sans: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+$font-size-xs: 0.875rem;
+$font-size-sm: 1rem;
+$font-size-base: 1.125rem;
+$font-size-lg: 1.5rem;
+$font-size-xl: 2rem;
+$font-size-2xl: 2.5rem;
+$font-size-3xl: 3.5rem;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$line-height-tight: 1.2;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.65;
+
+// Spacing
+$space-1: 0.25rem;
+$space-2: 0.5rem;
+$space-3: 0.75rem;
+$space-4: 1rem;
+$space-5: 1.25rem;
+$space-6: 1.5rem;
+$space-8: 2rem;
+$space-10: 2.5rem;
+$space-12: 3rem;
+$space-16: 4rem;
+$space-20: 5rem;
+
+// Layout
+$radius-sm: 6px;
+$radius-md: 12px;
+$radius-lg: 20px;
+$radius-xl: 28px;
+$max-width: 1200px;
+$header-height: 4rem;
+
+// Transitions
+$transition-fast: 0.2s ease;
+$transition-base: 0.3s ease;
+$transition-slow: 0.5s ease;
+$transition-fold: 0.9s cubic-bezier(0.4, 0, 0.2, 1);

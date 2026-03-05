@@ -1,0 +1,103 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  background: linear-gradient(135deg, $teal-green 0%, $teal-green 45%, $brown 45%, $brown 100%);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%233d5a50' opacity='0.03' d='M50 0L100 50L50 100L0 50z'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 1;
+    padding: $space-16 $space-6 $space-12;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-8;
+    align-content: center;
+
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: $space-12;
+      padding: $space-20 $space-8;
+    }
+  }
+
+  .hero__text {
+    color: $beige;
+  }
+
+  .hero__title {
+    @include heading-xl;
+    color: $cream;
+    margin: 0 0 $space-2;
+    letter-spacing: -0.02em;
+  }
+
+  .hero__subtitle {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-medium;
+    color: $tan;
+    margin: 0 0 $space-6;
+  }
+
+  .hero__bio {
+    font-size: $font-size-base;
+    line-height: $line-height-relaxed;
+    color: rgba($beige, 0.95);
+    margin: 0 0 $space-8;
+    max-width: 42ch;
+  }
+
+  .hero__cta {
+    display: inline-block;
+    padding: $space-4 $space-8;
+    background: $tan;
+    color: $brown;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    text-decoration: none;
+    border-radius: $radius-lg;
+    border: none;
+    cursor: pointer;
+    @include card-shadow;
+    transition: transform $transition-fast, box-shadow $transition-fast;
+
+    &:hover {
+      transform: translateY(-2px);
+      @include card-shadow-hover;
+    }
+  }
+
+  .hero__image-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+
+    @media (min-width: 768px) {
+      justify-self: end;
+    }
+  }
+
+  .hero__image {
+    display: block;
+    height: 100%;
+    width: auto;
+    max-height: 100vh;
+    object-fit: cover;
+  }
+}

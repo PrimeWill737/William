@@ -1,0 +1,9 @@
+// Main SCSS entry – forwards variables/mixins for use elsewhere, then loads all partials so styles are emitted
+@forward 'variables';
+@forward 'mixins';
+@use 'base';
+@use 'hero';
+@use 'features';
+@use 'grid';
+@use 'fold';
+@use 'projects';

@@ -1,0 +1,125 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.projects-page {
+  min-height: 100vh;
+  background: $dark-green;
+  @include section-padding;
+}
+
+.projects-page__inner {
+  @include container;
+}
+
+.projects-page__header {
+  text-align: center;
+  margin-bottom: $space-12;
+}
+
+.projects-page__title {
+  @include heading-xl;
+  color: $cream;
+  margin: 0 0 $space-2;
+}
+
+.projects-page__subtitle {
+  font-size: $font-size-base;
+  color: rgba($beige, 0.9);
+  margin: 0;
+}
+
+.projects-page__back {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  margin-bottom: $space-8;
+  padding: $space-2 $space-4;
+  color: $tan;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  text-decoration: none;
+  border-radius: $radius-md;
+  transition: background $transition-fast, color $transition-fast;
+
+  &:hover {
+    background: rgba($tan, 0.15);
+    color: $cream;
+  }
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-8;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-10;
+  }
+}
+
+.project-card {
+  background: $teal-green;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  @include card-shadow;
+  transition: transform $transition-base, box-shadow $transition-base;
+
+  &:hover {
+    transform: translateY(-4px);
+    @include card-shadow-hover;
+  }
+}
+
+.project-card__link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-card__media {
+  aspect-ratio: 16/10;
+  background: $forest-green;
+  overflow: hidden;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.project-card__body {
+  padding: $space-5 $space-4;
+}
+
+.project-card__title {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $cream;
+  margin: 0 0 $space-2;
+}
+
+.project-card__desc {
+  font-size: $font-size-sm;
+  line-height: $line-height-normal;
+  color: rgba($beige, 0.9);
+  margin: 0 0 $space-3;
+}
+
+.project-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+.project-card__tag {
+  font-size: $font-size-xs;
+  padding: $space-1 $space-2;
+  background: rgba($cream, 0.12);
+  color: $tan;
+  border-radius: $radius-sm;
+}

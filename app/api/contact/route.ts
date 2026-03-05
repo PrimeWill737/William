@@ -46,8 +46,16 @@ export async function POST(request: Request) {
       );
     }
 
+    const fromEmail = process.env.RESEND_FROM_EMAIL;
+    if (!fromEmail) {
+      console.error("RESEND_FROM_EMAIL is not set. Verify a domain at resend.com/domains and set this to an email on that domain.");
+      return NextResponse.json(
+        { error: "Email service is not configured. Please try again later." },
+        { status: 500 }
+      );
+    }
+
     const resend = new Resend(apiKey);
-    const fromEmail = process.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev";
 
     const { error } = await resend.emails.send({
       from: fromEmail,

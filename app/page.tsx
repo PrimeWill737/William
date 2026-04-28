@@ -63,6 +63,18 @@ const PROJECTS = [
     tags: ["React", "TypeScript", "Node", "SCSS"],
     href: "https://popswit.com",
   },
+  {
+    title: "PixelForge Studio",
+    description: "PixelForge studio is a free image and video converting tool, built for the public ",
+    tags: ["React", "TypeScript", "Node", "SCSS"],
+    href: "https://pixelforge-7qau.onrender.com",
+  },
+  {
+    title: "QrCode Generator",
+    description: "QrCode Generator is a free qr code generator tool, built for the public ",
+    tags: ["React", "TypeScript", "Node", "SCSS"],
+    href: "https://qr-code-ten-tau.vercel.app",
+  },
 ];
 
 export default function Home() {
@@ -347,7 +359,7 @@ As a developer, I am constantly exploring new technologies and improving my skil
             <header className="projects-page__header">
               <h2 className="projects-page__title">Projects</h2>
               <p className="projects-page__subtitle">
-                A selection of applications and sites I’ve built.
+                A selection of applications and sites I’ve built. Click card to view the project.
               </p>
             </header>
             <div className="projects-grid">

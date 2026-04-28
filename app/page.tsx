@@ -75,6 +75,12 @@ const PROJECTS = [
     tags: ["React", "TypeScript", "Node", "SCSS"],
     href: "https://qr-code-ten-tau.vercel.app",
   },
+  {
+    title: "NAB - Nigerian AI Builders",
+    description: "The Nigerian AI Builders (NAB) is a movement of innovators, developers, and entrepreneurs building AI solutions for Nigeria's biggest challenges. We believe that Nigerians are uniquely positioned to build AI that understands our context, speaks our languages, and solves our problems.",
+    tags: ["React", "TypeScript", "Node", "CSS", "AI", "Next.js"],
+    href: "https://aibuilders.ng",
+  },
 ];
 
 export default function Home() {

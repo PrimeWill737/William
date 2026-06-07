@@ -8,6 +8,10 @@
   right: 0;
   z-index: 100;
   height: $nav-height;
+
+  @media (display-mode: standalone), (display-mode: fullscreen), (display-mode: minimal-ui) {
+    top: 15px;
+  }
   @include glass-surface;
   border-bottom: 1px solid $border-subtle;
   transition:

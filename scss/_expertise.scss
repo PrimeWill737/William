@@ -1,0 +1,131 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.expertise {
+  @include section-padding;
+  background: $bg-secondary;
+
+  &__inner {
+    @include container;
+  }
+
+  &__header {
+    margin-bottom: $space-12;
+    max-width: 640px;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-4;
+
+    @media (min-width: 640px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (min-width: 1024px) {
+      grid-template-columns: repeat(4, 1fr);
+      gap: $space-5;
+    }
+  }
+
+  &__card {
+    @include card-base;
+    padding: $space-6;
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+
+    &:hover {
+      @include card-hover;
+    }
+
+    &-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: $radius-md;
+      background: $accent-dim;
+      color: $accent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &-title {
+      font-family: $font-display;
+      font-size: $font-size-base;
+      font-weight: $font-weight-bold;
+      color: $text-primary;
+      margin: 0;
+    }
+
+    &-desc {
+      font-size: $font-size-sm;
+      line-height: $line-height-normal;
+      color: $text-muted;
+      margin: 0;
+      flex: 1;
+    }
+
+    &-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: $space-1;
+    }
+
+    &-tag {
+      font-size: $font-size-xs;
+      padding: $space-1 $space-2;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid $border-subtle;
+      border-radius: $radius-sm;
+      color: $text-muted;
+    }
+  }
+
+  &__highlight {
+    margin-top: $space-6;
+    @include card-base;
+    padding: $space-8;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-6;
+    background: linear-gradient(135deg, $bg-card 0%, rgba($accent-indigo, 0.05) 100%);
+
+    @media (min-width: 768px) {
+      grid-template-columns: auto 1fr;
+      align-items: center;
+      gap: $space-8;
+    }
+
+    &:hover {
+      border-color: rgba($accent-indigo, 0.3);
+    }
+
+    &-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: $radius-lg;
+      background: $accent-indigo-dim;
+      color: $accent-indigo;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &-title {
+      font-family: $font-display;
+      font-size: $font-size-xl;
+      font-weight: $font-weight-bold;
+      color: $text-primary;
+      margin: 0 0 $space-2;
+    }
+
+    &-text {
+      font-size: $font-size-base;
+      line-height: $line-height-relaxed;
+      color: $text-secondary;
+      margin: 0;
+    }
+  }
+}

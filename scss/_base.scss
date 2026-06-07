@@ -1,4 +1,5 @@
 @use 'variables' as *;
+@use 'mixins' as *;
 
 *,
 *::before,
@@ -8,17 +9,24 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: $nav-height;
 }
 
 body {
   margin: 0;
-  font-family: $font-sans;
+  font-family: $font-body;
   font-size: $font-size-base;
   line-height: $line-height-normal;
-  color: $brown;
-  background: $cream;
+  color: $text-primary;
+  background: $bg-primary;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: $accent-dim;
+  color: $accent;
 }
 
 img {
@@ -33,17 +41,101 @@ a {
 
 button {
   font-family: inherit;
-  font-size: inherit;
 }
 
 .visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+  @include visually-hidden;
+}
+
+// Grain overlay
+.site {
+  position: relative;
+  min-height: 100vh;
+
+  &::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+// Scroll reveal — re-triggers on scroll up and down
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+
+    @for $i from 1 through 12 {
+      &:nth-child(#{$i}) {
+        transition-delay: #{($i - 1) * 0.06}s;
+      }
+    }
+  }
+}
+
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  font-family: $font-body;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: $accent;
+  margin-bottom: $space-4;
+
+  &::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: $accent;
+  }
+}
+
+.section-heading {
+  @include heading-section;
+  margin: 0 0 $space-4;
+}
+
+.section-desc {
+  font-size: $font-size-lg;
+  line-height: $line-height-relaxed;
+  color: $text-secondary;
+  margin: 0;
+  max-width: 56ch;
+}
+
+.not-found {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-8;
+  text-align: center;
+}
+
+.not-found__title {
+  @include heading-section;
+  margin-bottom: $space-4;
+}
+
+.not-found__message {
+  color: $text-secondary;
+  margin-bottom: $space-8;
+}
+
+.not-found__link {
+  @include btn-primary;
 }

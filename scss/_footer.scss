@@ -1,0 +1,80 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.footer {
+  padding: $space-12 0 $space-8;
+  border-top: 1px solid $border-subtle;
+  background: $bg-primary;
+
+  &__inner {
+    @include container-wide;
+    display: flex;
+    flex-direction: column;
+    gap: $space-8;
+
+    @media (min-width: 768px) {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+  }
+
+  &__mark {
+    width: 32px;
+    height: 32px;
+    border-radius: $radius-sm;
+    background: linear-gradient(135deg, $accent 0%, $accent-indigo 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-extrabold;
+    color: $bg-primary;
+  }
+
+  &__name {
+    font-family: $font-display;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+  }
+
+  &__tagline {
+    font-size: $font-size-sm;
+    color: $text-muted;
+    margin-top: $space-1;
+  }
+
+  &__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-4;
+  }
+
+  &__link {
+    font-size: $font-size-sm;
+    color: $text-muted;
+    text-decoration: none;
+    transition: color $transition-fast;
+    @include focus-ring;
+
+    &:hover {
+      color: $accent;
+    }
+  }
+
+  &__copy {
+    font-size: $font-size-xs;
+    color: $text-muted;
+    text-align: center;
+
+    @media (min-width: 768px) {
+      text-align: right;
+    }
+  }
+}

@@ -1,0 +1,197 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: $nav-height;
+  @include glass-surface;
+  border-bottom: 1px solid $border-subtle;
+  transition:
+    background $transition-base,
+    border-color $transition-base,
+    box-shadow $transition-base;
+
+  &.is-scrolled {
+    background: rgba($bg-primary, 0.85);
+    border-color: $border-default;
+    box-shadow: $shadow-sm;
+  }
+
+  &__inner {
+    @include container-wide;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-3;
+
+    @media (min-width: 768px) {
+      gap: $space-6;
+    }
+  }
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    text-decoration: none;
+    color: $text-primary;
+    font-family: $font-display;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-base;
+    letter-spacing: -0.02em;
+    min-width: 0;
+    @include focus-ring;
+
+    @media (min-width: 480px) {
+      gap: $space-3;
+      font-size: $font-size-lg;
+    }
+
+    > span:last-child {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  &__brand-mark {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+
+    @media (min-width: 480px) {
+      width: 36px;
+      height: 36px;
+    }
+    border-radius: $radius-md;
+    background: linear-gradient(135deg, $accent 0%, $accent-indigo 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-extrabold;
+    color: $bg-primary;
+  }
+
+  &__links {
+    display: none;
+    align-items: center;
+    gap: $space-1;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @media (min-width: 768px) {
+      display: flex;
+    }
+  }
+
+  &__link {
+    padding: $space-2 $space-4;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $text-secondary;
+    text-decoration: none;
+    border-radius: $radius-full;
+    transition: color $transition-fast, background $transition-fast;
+    @include focus-ring;
+
+    &:hover {
+      color: $text-primary;
+      background: rgba(255, 255, 255, 0.04);
+    }
+  }
+
+  &__cta {
+    @include btn-primary;
+    padding: $space-2 $space-4;
+    font-size: $font-size-xs;
+    flex-shrink: 0;
+    white-space: nowrap;
+
+    @media (max-width: 479px) {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      padding: $space-2 $space-5;
+    }
+  }
+
+  &__menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 1px solid $border-default;
+    border-radius: $radius-md;
+    color: $text-primary;
+    cursor: pointer;
+    @include focus-ring;
+
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
+}
+
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background: rgba($bg-primary, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity $transition-base;
+
+  &.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  &__link {
+    font-family: $font-display;
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-bold;
+    color: $text-secondary;
+    text-decoration: none;
+    padding: $space-3 $space-6;
+    transition: color $transition-fast;
+    @include focus-ring;
+
+    &:hover {
+      color: $accent;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: $space-4;
+    right: $space-6;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid $border-default;
+    border-radius: $radius-md;
+    color: $text-primary;
+    cursor: pointer;
+    @include focus-ring;
+  }
+}

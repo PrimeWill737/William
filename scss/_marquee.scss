@@ -1,0 +1,40 @@
+@use 'variables' as *;
+
+.marquee {
+  border-top: 1px solid $border-subtle;
+  border-bottom: 1px solid $border-subtle;
+  background: $bg-secondary;
+  padding: $space-5 0;
+  overflow: hidden;
+
+  &__track {
+    display: flex;
+    width: max-content;
+    animation: marquee 40s linear infinite;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: $space-6;
+    padding: 0 $space-6;
+    font-family: var(--font-display), system-ui, sans-serif;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: $text-muted;
+    white-space: nowrap;
+
+    &::after {
+      content: '◆';
+      font-size: 6px;
+      color: $accent;
+    }
+  }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}

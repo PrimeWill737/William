@@ -1,9 +1,11 @@
-// Main SCSS entry – forwards variables/mixins for use elsewhere, then loads all partials so styles are emitted
 @forward 'variables';
 @forward 'mixins';
 @use 'base';
+@use 'nav';
 @use 'hero';
-@use 'features';
-@use 'grid';
-@use 'fold';
-@use 'projects';
+@use 'marquee';
+@use 'about';
+@use 'expertise';
+@use 'work';
+@use 'contact';
+@use 'footer';

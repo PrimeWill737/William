@@ -230,6 +230,16 @@ export default function Home() {
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    if (menuOpen) {
+      window.addEventListener("keydown", onKeyDown);
+    }
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen]);
+
   const handleContactSubmit = useCallback(
     async (e: React.FormEvent) => {
       e.preventDefault();
@@ -272,7 +282,7 @@ export default function Home() {
 
   return (
     <div className="site">
-      <nav className={`nav${navScrolled ? " is-scrolled" : ""}`} aria-label="Main navigation">
+      <nav className={`nav${navScrolled ? " is-scrolled" : ""}${menuOpen ? " nav--menu-open" : ""}`} aria-label="Main navigation">
         <div className="nav__inner">
           <a href="#" className="nav__brand" aria-label="William Bosworth — Home">
             <span className="nav__brand-mark">W</span>
@@ -288,23 +298,27 @@ export default function Home() {
           <a href="#contact" className="nav__cta">Get in touch</a>
           <button
             type="button"
-            className="nav__menu-btn"
-            onClick={() => setMenuOpen(true)}
-            aria-label="Open menu"
+            className={`nav__menu-btn${menuOpen ? " is-open" : ""}`}
+            onClick={() => setMenuOpen((open) => !open)}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
+            <svg className="nav__menu-icon nav__menu-icon--open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
               <path d="M4 7h16M4 12h16M4 17h16" strokeLinecap="round" />
+            </svg>
+            <svg className="nav__menu-icon nav__menu-icon--close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
+              <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
             </svg>
           </button>
         </div>
       </nav>
 
-      <div className={`mobile-menu${menuOpen ? " is-open" : ""}`} aria-hidden={!menuOpen}>
-        <button type="button" className="mobile-menu__close" onClick={closeMenu} aria-label="Close menu">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
-            <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
-          </svg>
-        </button>
+      <div
+        id="mobile-menu"
+        className={`mobile-menu${menuOpen ? " is-open" : ""}`}
+        aria-hidden={!menuOpen}
+      >
         {NAV_LINKS.map((link) => (
           <a key={link.href} href={link.href} className="mobile-menu__link" onClick={closeMenu}>
             {link.label}
@@ -368,14 +382,14 @@ export default function Home() {
             <div className="hero__visual reveal">
               <div className="hero__image-frame">
                 <Image
-                  src="/image/me.png"
+                  src="/image/william-portrait.png"
                   alt="William Bosworth — Full-Stack Developer and CAIO"
                   className="hero__image"
                   width={600}
                   height={800}
                   priority
+                  unoptimized
                   sizes="(max-width: 1024px) 320px, 420px"
-                  style={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
               </div>
               <div className="hero__floating-card hero__floating-card--top">

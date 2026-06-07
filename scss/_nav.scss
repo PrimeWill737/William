@@ -15,10 +15,15 @@
     border-color $transition-base,
     box-shadow $transition-base;
 
-  &.is-scrolled {
+  &.is-scrolled,
+  &.nav--menu-open {
     background: rgba($bg-primary, 0.85);
     border-color: $border-default;
     box-shadow: $shadow-sm;
+  }
+
+  &.nav--menu-open {
+    z-index: 201;
   }
 
   &__inner {
@@ -124,6 +129,7 @@
   }
 
   &__menu-btn {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -134,18 +140,47 @@
     border-radius: $radius-md;
     color: $text-primary;
     cursor: pointer;
+    z-index: 201;
     @include focus-ring;
 
     @media (min-width: 768px) {
       display: none;
     }
+
+    &.is-open {
+      border-color: $border-accent;
+      background: $accent-dim;
+      color: $accent;
+    }
+  }
+
+  &__menu-icon {
+    position: absolute;
+    transition:
+      opacity $transition-fast,
+      transform $transition-fast;
+
+    &--close {
+      opacity: 0;
+      transform: rotate(-90deg) scale(0.8);
+    }
+  }
+
+  &__menu-btn.is-open &__menu-icon--open {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.8);
+  }
+
+  &__menu-btn.is-open &__menu-icon--close {
+    opacity: 1;
+    transform: rotate(0) scale(1);
   }
 }
 
 .mobile-menu {
   position: fixed;
   inset: 0;
-  z-index: 99;
+  z-index: 200;
   background: rgba($bg-primary, 0.95);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
@@ -154,6 +189,7 @@
   align-items: center;
   justify-content: center;
   gap: $space-2;
+  padding: calc($nav-height + $space-8) $space-6 $space-8;
   opacity: 0;
   pointer-events: none;
   transition: opacity $transition-base;
@@ -178,20 +214,4 @@
     }
   }
 
-  &__close {
-    position: absolute;
-    top: $space-4;
-    right: $space-6;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-    border: 1px solid $border-default;
-    border-radius: $radius-md;
-    color: $text-primary;
-    cursor: pointer;
-    @include focus-ring;
-  }
 }

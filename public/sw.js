@@ -1,4 +1,4 @@
-const CACHE_NAME = "william-portfolio-v1";
+const CACHE_NAME = "william-portfolio-v2";
 const PRECACHE_URLS = ["/", "/manifest.webmanifest", "/icon.svg"];
 
 self.addEventListener("install", (event) => {
@@ -30,7 +30,8 @@ self.addEventListener("fetch", (event) => {
         if (
           response.ok &&
           request.url.startsWith(self.location.origin) &&
-          !request.url.includes("/api/")
+          !request.url.includes("/api/") &&
+          !request.url.includes("/image/")
         ) {
           const copy = response.clone();
           caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));

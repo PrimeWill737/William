@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Syne, Inter } from "next/font/google";
 import ServiceWorkerRegister from "@/app/components/ServiceWorkerRegister";
+import PullToRefresh from "@/app/components/PullToRefresh";
 import "@/scss/main.scss";
 
 const syne = Syne({
@@ -44,6 +45,7 @@ export const viewport: Viewport = {
   colorScheme: "dark",
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -54,6 +56,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${syne.variable} ${inter.variable}`}>
       <body>
+        <PullToRefresh />
         {children}
         <ServiceWorkerRegister />
       </body>

@@ -226,9 +226,28 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    if (menuOpen) {
+      const scrollY = window.scrollY;
+      document.body.classList.add("menu-open");
+      document.body.style.top = `-${scrollY}px`;
+      document.body.dataset.scrollY = String(scrollY);
+      return;
+    }
+
+    const scrollY = Number(document.body.dataset.scrollY || 0);
+    document.body.classList.remove("menu-open");
+    document.body.style.top = "";
+    delete document.body.dataset.scrollY;
+    window.scrollTo(0, scrollY);
   }, [menuOpen]);
+
+  useEffect(() => {
+    return () => {
+      document.body.classList.remove("menu-open");
+      document.body.style.top = "";
+      delete document.body.dataset.scrollY;
+    };
+  }, []);
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {

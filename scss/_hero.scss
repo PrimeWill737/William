@@ -4,14 +4,17 @@
 .hero {
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   padding-top: $nav-height;
-  overflow-x: hidden;
+  overflow: clip;
 
   @media (max-width: 767px) {
     min-height: auto;
     align-items: flex-start;
+    overflow: visible;
+    overscroll-behavior-y: auto;
   }
 
   &__bg {

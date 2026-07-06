@@ -89,6 +89,32 @@ const PROJECTS: Project[] = [
     category: "platform",
   },
   {
+    title: "NAB — AI Assistant",
+    description:
+      "An AI assistant built with the latest LLM technologies to help you with your daily tasks and queries, as well as answers about the nigerian ai builders community.",
+    tags: ["AI", "Next.js", "TypeScript", "Python", "Leadership"],
+    href: "https://nabassistant.com",
+    category: "ai",
+    featured: true,
+  },
+  {
+    title: "JosRide — Premium Rides across Nigeria",
+    description:
+      "A premium ridesharing platform for Jos, Nigeria. We connect riders with drivers for seamless transportation across the cites, as well as disbatch riders, for waybill management, using electric bikes and bars for rides.",
+    tags: ["Next.js", "Python", "TypeScript", "Node", "CSS"],
+    href: "https://josride.com",
+    category: "platform",
+    featured: true,
+  },
+  {
+    title: "Cbrilliance FC — Football Club Website",
+    description:
+      "A football club website for Cbrilliance FC, Nigeria. With a modern design, and a responsive design for all devices. Cbrillaincefc is becoming the talk to the town in the northern part of Nigeria, for a start.",
+    tags: ["Next.js", "TypeScript", "Node", "CSS"],
+    href: "https://cbrilliancefc.com",
+    category: "platform",
+  },
+  {
     title: "Knowrist — Learning Platform",
     description:
       "Knowledge and reward-driven learning platform with gamified education flows, built for engagement and measurable outcomes.",
